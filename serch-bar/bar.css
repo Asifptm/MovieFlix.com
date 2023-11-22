@@ -1,0 +1,199 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-image: url('https://wallpapercave.com/wp/wp5636537.jpg');
+    padding: 0;background-color: #e2e1e1;
+    background-size: cover;
+  }
+
+  header {
+    
+    padding: 10px;
+    text-align: center;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+   
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+   
+    padding: 20px;
+  }
+
+  .search-container {
+    display: flex;
+    align-items: center;
+  }
+
+  input[type="text"] {
+    flex: 1;
+    padding: 13px;
+    font-size: 16px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    border-radius: 4px;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    background-color: rgb(245, 245, 245);
+  }
+
+  button {
+    padding: 10px;
+    font-size: 17px;
+    border-radius: 4px;
+    background-color: #f51212;
+    color: #fff;
+    margin-left: 10px;
+    border: none;
+    cursor: pointer;
+  }
+
+  .results {
+    margin-top: 20px;
+    
+  }
+  .highlight {
+    color: red;
+    font-weight: bold;
+  }
+
+  .movie {
+    display: flex;
+    margin-bottom: 10px;
+    border-radius: 5px
+    ;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    background-color: #f1eeee;
+    
+  }
+
+  .movie img {
+    max-width: 100px;
+    height: auto;
+    border-radius: 2px;
+    margin-right: 10px;
+  }
+
+  .movie-details {
+    flex: 1;
+  }
+
+  .movie-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #0e0909;
+    margin-top: 4px;
+    margin-bottom: 5px;
+  }
+
+  .movie-category {
+    font-size: 14px;
+    margin-top: 5px;
+    color: #6e6e6e;
+  }
+
+  .movie-release {
+    font-size: 14px;
+    margin-top:5px
+    ;
+    color: #888;
+  }
+  .movie-language{
+    font-size: 14px;
+    margin-top:5px
+    ;
+    color: #686868;
+  }
+
+  .movie-rating {
+    font-size: 14px;
+    color: #f00;
+    margin-top: 5px;
+  }
+
+  .message {
+   
+    color: #f3f2f2;
+    padding: 10px;
+    
+   margin-left: 20px;
+    border-radius: 4px;
+  }
+
+
+  @media screen and (max-width: 768px) {
+    .movie-rating {
+    font-size: 12px;
+    color: #f00;
+  }
+    
+  }
+
+
+
+
+  
+.content {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+.navbar {
+  background-color: #0e0d0d;
+  color: #fff;
+  display: none; /* Hide the navbar by default */
+  justify-content: space-around;
+  align-items: center;
+  padding: 8px;
+  position: fixed; /* Fixed position for mobile view */
+  bottom: 0;
+  left: 0;
+  width: 100%; /* Full width */
+  z-index: 1;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #a1a1a1;
+  margin: 0;
+  padding: 10px 15px; /* Adjust padding to provide space for the icons */
+  font-size: 18px; /* Increase font size for better visibility */
+  position: relative;
+  transition: color 0.3s;
+}
+
+
+.nav-link:hover{
+  color: #D90000;
+}
+
+.tab-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #e50914;
+  transform: scaleX(0);
+  transition: transform 0.3s ease-in-out;
+}
+
+.nav-link.active .tab-line {
+  transform: scaleX(1);
+}
+
+.nav-link .tab-line {
+  transform-origin: left;
+}
+
+/* Show the navbar on screens narrower than 769px (adjust as needed) */
+@media (max-width: 768px) {
+  .navbar {
+      display: flex;
+  }
+  
+  .nav-link {
+      font-size: 20px; /* Reduce font size for smaller screens */
+  }
+}
+

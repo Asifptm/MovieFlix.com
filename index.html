@@ -1,0 +1,304 @@
+
+    <!-------CREATE--BY--Asif--muhammed----developer-->
+         <!--------movie---website---->
+   
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Moveflix.com</title>
+  <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-------- style--css------>
+  <link rel="stylesheet" type="text/css" href="style.css">
+ 
+  <!-----------font--awesome----------->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+<body>
+  <header>
+    <nav class="navbar2">
+      <div class="brand-icon">
+        <img src="asset/icons/logo.png" alt="Brand Logo">
+      </div>
+      
+      <div class="profile-icons">
+          <div class="language-dropdown">
+            <button onclick="toggleLanguageDropdown()">
+              <i class="fas fa-globe-asia"></i> Lang
+            </button>
+            <div id="languageOptions" class="dropdown-content">
+              <!-- Add your language options here with icons -->
+              <a href="#" onclick="changeLanguage('en')"><i class="fas fa-flag-usa"></i> English</a>
+              <a href="#" onclick="changeLanguage('es')"><i class="fas fa-flag"></i> Spanish</a>
+              <a href="#" onclick="changeLanguage('fr')"><i class="fas fa-flag"></i> French</a>
+              <!-- Add more languages as needed -->
+            </div>
+          </div>
+          
+        
+          
+          <div class="login-button">
+            <button onclick="location.href='login.html'">
+              <i class="fas fa-user-astronaut"></i> Login
+            </button>
+          </div>
+        </div>
+      
+    </nav>
+  </header>
+<!-- Popup element -->
+<div id="popup" class="popup">
+  <p id="popupMessage"></p>
+</div>
+
+
+  
+  <div class="slider2">
+    <div class="banner">
+      <img src="https://m.media-amazon.com/images/S/pv-target-images/dfa539717409b2ec7800839cf0a0265a9376378eff070f3f60e765c9ea8f2c64.png" alt="Movie Poster Placeholder">
+    </div>
+    <div class="movie-details2">
+     <h1 class="movie-title2">CITADEL</h1>
+       <span class="additional-info">
+        <span class="additional-info-box">4K Dolby Atmos</span>
+<span class="additional-info-box ua">U/A</span>
+        <span class="additional-info-box">Series</span>
+      </span>
+      <ul class="movie-info">
+        <li>2023</li>
+        <li>4 Langauge</li>
+        <li>Adventure</li>
+        <li>Romance</li>
+        <li>Action</li>
+      </ul>
+      <div class="action-buttons">
+        <button class="action-button">Download Now<i class="fas fa-cloud-download"></i></button>
+        <button class="action-button">+</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Duplicate the slider content for additional movies -->
+  <div class="slider2">
+    <div class="banner">
+      <img src="https://w0.peakpx.com/wallpaper/965/851/HD-wallpaper-avatar-2-2018-poster-fantasy-movie-avatar-2-navi-blue.jpg" alt="Movie Poster Placeholder">
+    </div>
+    <div class="movie-details2">
+      <h1 class="movie-title2">Avatar 2 : Way of water</h1>
+       <span class="additional-info">
+        <span class="additional-info-box">IMAX</span>
+       <span class="additional-info-box ua">U/A</span>
+        <span class="additional-info-box">Movie</span>
+      </span>
+      <ul class="movie-info">
+        <li>2022</li>
+        <li>Multilangauge</li>
+        <li>Action</li>
+        <li>Adventure</li>
+        <li>Sci-Fi</li>
+      </ul>
+      <div class="action-buttons">
+        <button class="action-button">Download Now <i class="fas fa-cloud-download"></i></button>
+        <button class="action-button">+</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Duplicate the slider content for a third movie -->
+  <div class="slider2">
+    <div class="banner">
+      <img src="https://metadata-static.plex.tv/5/gracenote/5b8540f3078455bbdb660d84e46e7f73.jpg" alt="Movie Poster Placeholder">
+    </div>
+    <div class="movie-details2">
+      <h1 class="movie-title2">Gaurdians of Galaxy : Volume 3</h1>
+       <span class="additional-info">
+        <span class="additional-info-box">UHD</span>
+      <span class="additional-info-box ua">U/A +16 </span>
+        <span class="additional-info-box">PART 3</span>
+      </span>
+      <ul class="movie-info">
+        <li>2023</li>
+        <li>Multilangauge</li>
+        <li>Superhero</li>
+        <li>Sci-fic</li>
+        <li>Comdey</li>
+      </ul>
+      <div class="action-buttons">
+      
+        <button class="action-button">Download Now <i class="fas fa-cloud-download"></i></button>
+        <button class="action-button">+</button>
+      </div>
+    </div>
+  </div>
+
+    
+  <div class="slider2">
+    <div class="banner">
+      <img src="https://img1.hotstarext.com/image/upload/f_auto,t_web_m_1x/sources/r1/cms/prod/9679/1549679-h-f0a16d62827b" alt="Movie Poster Placeholder">
+    </div>
+    <div class="movie-details2">
+     <h1 class="movie-title2">THE NIGHT MANAGER </h1>
+       <span class="additional-info">
+        <span class="additional-info-box">Full HD</span>
+<span class="additional-info-box ua">U/A +16</span>
+        <span class="additional-info-box">Series</span>
+      </span>
+      <ul class="movie-info">
+        <li>2022</li>
+        <li>4 Langauge</li>
+        <li>Thriller</li>
+        <li>Romance</li>
+        <li>Spy</li>
+      </ul>
+      <div class="action-buttons">
+        <button class="action-button">Download Now<i class="fas fa-cloud-download"></i></button>
+        <button class="action-button">+</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="slider2">
+    <div class="banner">
+      <img src="https://www.nowrunning.com/content/movie/2023/chris-27394/bg3.jpg" alt="Movie Poster Placeholder">
+    </div>
+    <div class="movie-details2">
+     <h1 class="movie-title2">Christy</h1>
+       <span class="additional-info">
+        <span class="additional-info-box">Full HD</span>
+<span class="additional-info-box ua">U/A</span>
+        <span class="additional-info-box">Movie</span>
+      </span>
+      <ul class="movie-info">
+        <li>2022</li>
+        <li>Malayalam</li>
+        <li>Drama</li>
+        <li>Romance</li>
+        
+      </ul>
+      <div class="action-buttons">
+        <button class="action-button">Download Now<i class="fas fa-cloud-download"></i></button>
+        <button class="action-button">+</button>
+      </div>
+    </div>
+  </div>
+  <div class="slider2">
+    <div class="banner">
+      <img src="https://img.onmanorama.com/content/dam/mm/en/entertainment/movie-reviews/images/2023/7/14/padmini-movie-review.jpg" alt="Movie Poster Placeholder">
+    </div>
+    <div class="movie-details2">
+     <h1 class="movie-title2">Pathmini</h1>
+       <span class="additional-info">
+        <span class="additional-info-box">4K</span>
+<span class="additional-info-box ua">U/A</span>
+        <span class="additional-info-box">Movie</span>
+      </span>
+      <ul class="movie-info">
+        <li>2023</li>
+        <li>Malayalam</li>
+        <li>Drama</li>
+        <li>Romance</li>
+        <li>Family</li>
+      </ul>
+      <div class="action-buttons">
+        <button class="action-button">Download Now<i class="fas fa-cloud-download"></i></button>
+        <button class="action-button">+</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="slider2">
+    <div class="banner">
+      <img src="https://xstreamcp-assets-msp.streamready.in/assets/LIONSGATEPLAY/MOVIE/6492c0125f85c677750e95cc/images/JOHNWICKCHAPTER3PARABELLUMY2019M_Airtel_thumbnail1_1920X1080.jpg" alt="Movie Poster Placeholder">
+    </div>
+    <div class="movie-details2">
+     <h1 class="movie-title2">John Wick Chapter:3</h1>
+       <span class="additional-info">
+        <span class="additional-info-box">UHD</span>
+<span class="additional-info-box ua">U/A</span>
+        <span class="additional-info-box">Movie</span>
+      </span>
+      <ul class="movie-info">
+        <li>2023</li>
+        <li>English</li>
+        <li>Action</li>
+        <li>Thriller</li>
+        <li>Sci-fci</li>
+      </ul>
+      <div class="action-buttons">
+        <button class="action-button">Download Now<i class="fas fa-cloud-download"></i></button>
+        <button class="action-button">+</button>
+      </div>
+    </div>
+    
+  </div>
+
+
+   <div class="slide-indicators">
+    <span class="slide-indicator active"></span>
+    <span class="slide-indicator"></span>
+    <span class="slide-indicator"></span>
+    <span class="slide-indicator"></span>
+    <span class="slide-indicator"></span>
+    <span class="slide-indicator"></span>
+    <span class="slide-indicator"></span>
+  </div>
+  
+  
+
+
+
+
+  <div class="content">
+    
+    
+
+
+<!-- Movie Section -->
+<section>
+  <h2 class="section-title">Popular Movies</h2>
+  <div class="movie-slider" id="popular-movies"></div>
+</section>
+
+<section>
+  <h2 class="section-title">Top Movies</h2>
+  <div class="movie-slider" id="top-movies"></div>
+</section>
+
+<section>
+  <h2 class="section-title">Streaming Now</h2>
+  <div class="movie-slider" id="streaming-now"></div>
+</section>
+
+<section>
+  <h2 class="section-title">Latest Movies</h2>
+  <div class="movie-slider" id="latest-movies"></div>
+</section>
+
+<section>
+  <h2 class="section-title">Bollywood</h2>
+  <div class="movie-slider" id="bollywood-movies"></div>
+</section>
+
+
+
+
+</div>
+
+
+
+  <nav class="navbar">
+    <a href="#" class="nav-link active"><i class="fas fa-home"></i> </a>
+    <a href="serch-bar/search.html" class="nav-link"><i class="fas fa-search"></i> </a>
+    <a href="#" class="nav-link"><i class="fas fa-tv"></i> </a>
+    <a href="#" class="nav-link"><i class="fas fa-film"></i> </a>
+   
+   <a href="proflie page/settings/settings.html" class="nav-link"><i class="fas fa-cog"></i> </a>
+   
+</nav>
+
+
+  <script src="script.js"></script>
+ 
+</body>
+</html>

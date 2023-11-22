@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Details</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="result.css"> <!-- Include the custom CSS file for result.html -->
+</head>
+
+<body>
+  
+  <div class="banner" id="bannerSection">
+    <!-- Banner content will be displayed here -->
+  </div>
+  <div class="container">
+    <div class="movie-details-container">
+      <h1 class="movie-title" id="movieTitle"></h1>
+      <div class="movie-release-lang">
+        <span class="release-datess" id="movieReleaseDate"></span>
+        <span class="languagess" id="movieLanguage"></span>
+      </div>
+      
+      <div class="rating" id="movieRating">
+        <!-- Rating stars will be displayed here -->
+      </div>
+      <div class="movie-details">
+        <span class="category" id="movieCategory"></span>
+        <span class="duration" id="movieDuration"></span>
+        <span class="quality" id="movieQuality"></span>
+      </div>
+      <div class="movie-langauge" id="movie-Langauge">
+
+      </div>
+      <div class="movie-description" id="movieDescription">
+        <!-- Movie description will be displayed here -->
+      </div>
+
+      <div class="cast-info" id="castInfo">
+        <!-- Cast details will be displayed here -->
+      </div>
+      
+      <div class="movie-actions">
+        <span class="action-icon">
+          <i class="fas fa-heart" id="heartIcon" onclick="toggleHeartIconColor()"></i>
+        </span>
+        <span class="action-icon share-icon" onclick="toggleSharePopup()">
+          <i class="fas fa-share-alt"></i>
+        </span>
+        <span class="action-icon">
+          <i class="far fa-bookmark"></i>
+        </span>
+      </div>
+
+      <div class="extra-info">
+        <a href="#" class="download-button">
+          <i class="fas fa-download"></i> Download Now
+        </a>
+        <span class="more-info" onclick="toggleMoreInfo()">
+          <i class="fas fa-info-circle"></i> More Info
+        </span>
+      </div>
+    </div>
+
+    <div class="share-popup" id="sharePopup">
+      <span class="popup-close" onclick="toggleSharePopup()">
+        <i class="fas fa-times"></i>
+      </span>
+      <ul class="social-icons">
+        <li><a href="#"><i class="fab fa-facebook"></i></a>Facebook</li>
+        <li><a href="#"><i class="fab fa-twitter"></i></a> twitter</li>
+        <li><a href="#"><i class="fab fa-instagram"></i></a>instagram</li>
+        <li><a href="#"><i class="fab fa-whatsapp"></i></a>whatsapp</li>
+      </ul>
+    </div>
+  </div>
+
+
+
+  
+
+
+
+
+
+
+  <div class="top">
+    <h1 class="top-title">Top Rated</h1>
+    <div class="top-slider" id="movieSlider">
+        <!-- Movie cards will be dynamically generated here -->
+    </div>
+</div>
+
+
+
+<footer>
+  <div class="footer-content">
+    <!-- Dynamic Copyright information -->
+    <p>&copy; <span id="currentYear"></span> MovieFlix. All rights reserved.</p>
+    <p class="created-by">Created by Asif.Mhd</p>
+    <!-- Version number -->
+    <i class="fab fa-github"></i></a><p>Version 1.08</p>
+    <!-- Payment card icons -->
+    <div class="payment-icons">
+      <i class="fab fa-cc-visa"></i>
+      <i class="fab fa-cc-mastercard"></i>
+      <i class="fab fa-cc-amazon-pay"></i>
+      <i class="fab fa-cc-paypal"></i>
+    </div>
+  </div>
+</footer>
+
+
+
+ 
+
+ <script src="main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,1053 @@
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Poster Slider</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #000000; /* Black background */
+    }
+
+   
+    .section-title {
+  position: relative;
+  font-size: 20px;
+  margin-left: 10px;
+  padding-left: 30px; /* Increased padding to accommodate the icon */
+  color: #ffffff; /* White text color */
+  margin-bottom: 10px;
+}
+
+
+.section-title::before {
+  content: '\25BA'; /* Unicode arrow character (Right-pointing triangle) */
+  position: absolute;
+  left: 0;
+  top: 0;
+  align-items: center;
+  font-size: 16px;
+  border-radius: 50%; /* Adding border radius */
+  background-color: #ec1212; /* Background color of the triangle */
+  color: #0f0707; /* Color of the triangle */
+  padding: 2px; /* Adjust the padding to control the size of the triangle */
+}
+
+
+
+.movie-slider {
+  display: flex;
+  margin-top: 10px;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  width: 100%;
+ 
+  max-width: 1260px;
+  margin: 20px auto;
+}
+
+/* Customize the scrollbar */
+.movie-slider::-webkit-scrollbar {
+ 
+  width: 4px; /* Width of the scrollbar */
+}
+
+/* Track (background) of the scrollbar */
+.movie-slider::-webkit-scrollbar-track {
+  margin-left: 10px;
+  margin-right: 5px;
+  background: #161515; /* Light gray color */
+}
+
+/* Handle (thumb) of the scrollbar */
+.movie-slider::-webkit-scrollbar-thumb {
+  background: #ff0b0b; /* Red color for the thumb */
+  border-radius: 4px; /* Rounded corners for the thumb */
+}
+
+
+    .movie-card {
+      flex: 0 0 auto;
+      width: 70%;
+      max-width: 250px;
+     margin-left: 10px;
+     margin-bottom: 10px;
+      margin-right: 10px;
+      background-color: #222222; /* Dark gray background */
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+      overflow: hidden;
+      scroll-snap-align: center;
+      position: relative;
+      animation: slideInFromRight 0.5s ease;
+    }
+
+    .movie-card img {
+      width: 100%;
+      height: 350px;
+     
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .movie-details {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 15px;
+      transform: translateY(100%);
+      transition: transform 0.3s;
+      font-family: "Arial", sans-serif;
+      color: #ffffff; /* White text color */
+      text-align: left;
+      background-image: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%);
+    }
+
+    .movie-card:hover .movie-details {
+      transform: translateY(0);
+    }
+
+    .category {
+      display: inline-block;
+      background-color: #ffcc00;
+      color: #000000; /* Black text color */
+      padding: 5px 10px;
+      border-radius: 3px;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    .title {
+      margin-top: 10px;
+      margin-bottom: 15px;
+      font-size: 18px;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+      
+      color: #ffffff; /* White text color */
+    }
+
+    .language {
+      font-size: 14px;
+      text-align: left;
+      color: #ffffff; /* White text color */
+    }
+
+    .year {
+  color: #fefeff;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: left;
+  text-transform: uppercase;
+}
+/* CSS for the poster image and fallback image */
+.poster-image {
+  display: block;
+ 
+  max-width: 100%; /* Ensure the image doesn't exceed its container's width */
+  height: auto; /* Maintain the aspect ratio */
+  transition: opacity 0.3s ease; /* Smooth transition on image load/fade */
+}
+
+.poster-image.fallback {
+  align-items: center;
+  object-fit: contain;
+  border: 2px dashed #e7e7e7; /* Dashed border for the fallback image */
+  background-color: #f0f0f0; /* Light gray background color for the fallback image */
+  opacity: 0.7; /* Reduced opacity for the fallback image */
+  padding: 10px; /* Add padding to create some spacing around the image */
+  box-sizing: border-box; /* Include padding in the total element size */
+}
+
+
+
+
+
+
+    .quality {
+      display: block;
+      font-size: 14px;
+     border: 2px solid #ffbb00;
+     padding: 5px  8px;
+     width: fit-content;
+     border-radius: 4px;
+      color: #f8f3f3; /* White text color */
+      margin-top: 5px;
+    }
+    
+
+    .ratings {
+      font-size: 18px;
+      color: #ffd900;
+      margin-top: 10px;
+    }
+
+    .star {
+      margin-right: 5px;
+    }
+
+    /* Animation for slide-in */
+    @keyframes slideInFromRight {
+      0% {
+        transform: translateX(100%);
+      }
+      100% {
+        transform: translateX(0);
+      }
+    }
+
+    /* Media Query for Mobile View */
+    @media (max-width: 600px) {
+      .movie-card {
+        width: 45%;
+        margin-right: 5px;
+        height: 320px;
+        margin-bottom: 10px;
+      }
+
+      .movie-details {
+        padding: 10px;
+        font-size: 14px;
+      }
+
+      .title {
+        font-size: 15px;
+      }
+
+      .language,
+      .quality,
+      .ratings {
+        font-size: 12px;
+      }
+    }
+
+    /* Media Query for Tablet View */
+    @media (min-width: 601px) and (max-width: 900px) {
+      .movie-card {
+        width: 38%;
+        margin-right: 5px;
+      }
+    }
+
+    /* Media Query for Desktop View */
+    @media (min-width: 901px) {
+      .movie-card {
+        width: 30%;
+        margin-right: 10px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Movie Section -->
+  <section>
+    <h2 class="section-title">Popular Movies</h2>
+    <div class="movie-slider" id="popular-movies"></div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Top Movies</h2>
+    <div class="movie-slider" id="top-movies"></div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Streaming Now</h2>
+    <div class="movie-slider" id="streaming-now"></div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Latest Movies</h2>
+    <div class="movie-slider" id="latest-movies"></div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Bollywood</h2>
+    <div class="movie-slider" id="bollywood-movies"></div>
+  </section>
+
+  <script>
+    const popularMoviesData = [
+  {
+    title: "Inception",
+    language: "English ",
+    rating: 6.2,
+    category: "Sci-Fi",
+    duration: "2h 28m",
+    poster: "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_.jpg ",
+    quality: "HD",
+    banner: "https://i-viaplay-com.akamaized.net/viaplay-prod/934/564/1460158962-aa63ce74b4e89191114a33118191a291a731cf4f.jpg?width=960&height=540",
+    description: "Inception is a mind-bending science fiction film directed by Christopher Nolan. It explores the concept of entering dreams to steal information.",
+    cast: [
+      { name: "Leonardo DiCaprio", image: "https://example.com/leo.jpg" },
+      { name: "Joseph Gordon-Levitt", image: "https://example.com/joseph.jpg" },
+      { name: "Elliot Page", image: "https://example.com/elliot.jpg" },
+    ],
+    certificate: "U/A +13 Rated",
+    // Add the certificate field
+    year: 2010 ,// Add the certificate field
+  
+  },
+  // ... Existing entries ...
+  // Add more movies for the popular section
+  // New entries for the popular section
+  {
+    title: "Avatar : Way of Water",
+    language: "Multi-language",
+    rating: 4.7,
+    certificate: "U/A Rated",
+    category: "Sci-Fi",
+    duration: "2h 42m",
+    quality: "IMAX",
+    poster: "https://d32qys9a6wm9no.cloudfront.net/images/movies/poster/89/c5c1024ecc2ff962a3ba5869c9c0ec11_300x442.jpg?t=1684272618",
+    banner: " https://images2.thanhnien.vn/Uploaded/quochungqc/2022_12_14/avatar-2-imax-3d-6584.jpg",
+    description: "Avatar is a groundbreaking science fiction film directed by James Cameron, set on the alien planet of Pandora.",
+    cast: [
+      { name: "Sam Worthington", image: "https://example.com/sam.jpg" },
+      { name: "Zoe Saldana", image: "https://example.com/zoe.jpg" },
+      { name: "Sigourney Weaver", image: "https://example.com/sigourney.jpg" },
+    ],
+    year: 2009,
+  },
+  // Add more movies for the popular section
+  {
+    title: "The Matrix",
+    language: "English",
+    poster: " https://m.media-amazon.com/images/M/MV5BMGJkNDJlZWUtOGM1Ny00YjNkLThiM2QtY2ZjMzQxMTIxNWNmXkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_.jpg",
+    rating: 8.9,
+    category: "Sci-Fi ,Action",
+    certificate: "U/A +13",
+    duration: "2h 16m",
+    quality: "4K Dolby Atmos",
+    banner: "https://beam-images.warnermediacdn.com/BEAM_LWM_DELIVERABLES/a553a6c7-66a0-42fc-8f6a-a47f926fe435/de639670577d343d0cc644c38b11f832966d1f56.jpg?submitted=1684667214416&host=wbd-images.prod-vod.h264.io&partner=beamcom",
+    description: "The Matrix is a mind-bending science fiction film directed by the Wachowskis, exploring a dystopian future where reality is simulated.",
+    cast: [
+      { name: "Keanu Reeves", image: "https://example.com/keanu.jpg" },
+      { name: "Carrie-Anne Moss", image: "https://example.com/carrie.jpg" },
+      { name: "Hugo Weaving", image: "https://example.com/hugo.jpg" },
+    ],
+    year: 2021,
+  },
+  // Add more movies for the popular section
+  {
+    title: "Interstellar",
+    language: "English",
+    certificate: "U/A Rated",
+    rating: 4.8,
+    category: "Sci-Fi",
+    poster: "https://example.com/inception_poster.jpg",
+    duration: "2h 49m",
+    quality: "HD",
+    banner: "https://picsum.photos/800/400?random=13",
+    description: "Interstellar is a visually stunning science fiction film directed by Christopher Nolan, following a group of astronauts on a space voyage.",
+    cast: [
+      { name: "Matthew McConaughey", image: "https://example.com/matthew.jpg" },
+      { name: "Anne Hathaway", image: "https://example.com/anne.jpg" },
+      { name: "Jessica Chastain", image: "https://example.com/jessica.jpg" },
+    ],
+    year: 2014,
+  },
+  // Add more movies for the popular section
+  {
+    title: "Jailer",
+    language: "4 Languages",
+    certificate: "U/A +13",
+    rating: 5.6,
+    poster: "https://m.media-amazon.com/images/M/MV5BODMzNzhkMzUtZDRkMy00MzVjLWJmYzgtZjBhZTJhY2I4M2Y1XkEyXkFqcGdeQXVyMTEzNzg0Mjkx._V1_.jpg",
+    category: "Action . Drama",
+    duration: "2h 44m",
+    quality: "4K",
+    banner: " https://i.samaaenglish.tv/primary/2023/08/0419414865cf709.webp",
+    description: "Muthuvel Pandian is a retired jailer living happily with his wife, son, daughter-in-law and grandson. His son who is an Assistant Commissioner of police goes missing while investigating the case of missing temple idols and is presumed dead. The story is about how Muthuvel Pandian goes toe to toe against Varma, the mastermind behind large-scale smuggling of temple idols and treasures, and avenges his son.",
+    cast: [
+      { name: "Ryan Gosling", image: "https://example.com/ryan.jpg" },
+      { name: "Harrison Ford", image: "https://example.com/harrison.jpg" },
+      { name: "Ana de Armas", image: "https://example.com/ana.jpg" },
+    ],
+    year: 2023,
+  },
+  // Add more movies for the popular section
+  {
+    title: "Beast",
+    language: "Malayalam , Tamil",
+    rating: 4.5,
+    certificate: "U/A Rated",
+    category: "Action , Romance",
+    duration: "3h 31m",
+    poster: " https://www.naijaprey.com/wp-content/uploads/2022/05/Beast.jpg",
+    quality: "HD",
+    banner: "https://www.filmibeat.com/img/2022/05/1-1651664905.jpg?03082023193631",
+    description: "After a shopping mall in Chennai gets hijacked by terrorists who hold the visitors as hostages, Veera Raghavan, a spy also trapped in the mall, decides to save the hostages by eliminating the terrorists",
+    cast: [
+      { name: "Sandra Bullock", image: "https://example.com/sandra.jpg" },
+      { name: "George Clooney", image: "https://example.com/george.jpg" },
+    ],
+    year: 2022,
+  },
+  // Add more movies for the popular section
+  {
+    title: "The Avengers Endgame",
+    language: "English",
+    rating: 4.7,
+    poster: " https://images.moviesanywhere.com/4677177f6f0595289bc3e767e7b47459/1d6c6c73-ab1e-4453-969c-6a4e965ebb37.jpg",
+    category: "Action",
+    certificate: "U/A +16",
+    duration: "2h 23m",
+    quality: "4k",
+    banner: " https://www.koimoi.com/wp-content/new-galleries/2023/04/relive-the-6-top-moments-from-marvels-avengers-endgame-available-on-disney-hotstar-on-its-4th-anniversary-01.jpg",
+    description: "The Avengers is a blockbuster superhero film directed by Joss Whedon, featuring a team of Marvel superheroes coming together to save the world.",
+    cast: [
+      { name: "Robert Downey Jr.", image: "https://example.com/robert.jpg" },
+      { name: "Chris Evans", image: "https://example.com/chris.jpg" },
+      { name: "Scarlett Johansson", image: "https://example.com/scarlett.jpg" },
+    ],
+    year: 2012,
+  },
+  // Add more movies for the popular section
+];
+
+const topMoviesData = [
+  {
+    title: "The Dark Knight",
+    language: "English",
+    rating: 4.9,
+    category: "Action",
+    duration: "2h 32m",
+    certificate: "U/A",
+    poster: " https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_.jpg",
+    quality: "4K",
+    banner: "https://beam-images.warnermediacdn.com/BEAM_LWM_DELIVERABLES/46c5fcd3-9081-49e1-941f-5f31abd27f98/104dafdbefa290a79dded0fa748643b51a6b1a68.jpg?host=wbd-images.prod-vod.h264.io&partner=beamcom",
+    description: "The Dark Knight is a superhero film directed by Christopher Nolan, featuring Batman's struggle against the chaos brought by the Joker.",
+    cast: [
+      { name: "Christian Bale", image: "https://example.com/bale.jpg" },
+      { name: "Heath Ledger", image: "https://example.com/ledger.jpg" },
+      { name: "Gary Oldman", image: "https://example.com/oldman.jpg" },
+    ],
+    year: 2008,
+  },
+  // ... Existing entries ...
+  // Add more movies for the top section
+  // New entries for the top section
+  {
+    title: "Black Widow",
+    language: "English",
+    rating: 4.7,
+    category: "Action",
+    certificate: "U/A",
+    duration: "2h 50m",
+    poster: "https://upload.wikimedia.org/wikipedia/en/e/e9/Black_Widow_%282021_film%29_poster.jpg ",
+    quality: "UHD",
+    banner: " https://fr.web.img3.acsta.net/r_1280_720/newsv7/21/07/30/15/03/4397879.jpg",
+    description: " In Marvel Studios' action-packed spy thriller  Natasha Romanoff aka Black Widow confronts the darker parts of her ledger when a dangerous conspiracy with ties to her past arises. Pursued by a force that will stop at nothing to bring her down, Natasha must deal with her history as a spy and the broken relationships left in her wake long before she became an Avenger.",
+    cast: [
+      { name: "Tom Hardy", image: "https://example.com/tom_hardy.jpg" },
+      { name: "Charlize Theron", image: "https://example.com/charlize.jpg" },
+      { name: "Nicholas Hoult", image: "https://example.com/nicholas.jpg" },
+    ],
+    year: 2021,
+  },
+  // Add more movies for the top section
+  {
+    title: "John Wick 4",
+    language: "English",
+    rating: 4.6,
+    poster: "https://m.media-amazon.com/images/I/81fk-N7tvbL._AC_UF1000,1000_QL80_.jpg ",
+    category: "Action",
+    duration: "2h 41m",
+    certificate: "U/A rated",
+    quality: "UHD",
+    banner: "https://imgeng.jagran.com/images/2023/may/JohnWickChapter41684919896891.jpg",
+    description: "John Wick is a thrilling action film where an ex-hitman seeks vengeance against those who wronged him, and it quickly turns into a violent rampage.",
+    cast: [
+      { name: "Keanu Reeves", image: "https://example.com/keanu_reeves.jpg" },
+      { name: "Michael Nyqvist", image: "https://example.com/michael.jpg" },
+      { name: "Alfie Allen", image: "https://example.com/alfie.jpg" },
+    ],
+    year: 2014,
+  },
+  // Add more movies for the top section
+  {
+    title: "Die Hard",
+    language: "English",
+    rating: 4.8,
+    category: "Action",
+    certificate: "U/A",
+    poster: "https://cdn.wallpapersafari.com/16/69/rcj6Cz.jpg ",
+    duration: "2h 12m",
+    quality: "HD",
+    banner: "https://picsum.photos/800/400?random=19",
+    description: "Die Hard is a classic action film starring Bruce Willis as a New York cop who must save hostages from a terrorist takeover of a Los Angeles skyscraper.",
+    cast: [
+      { name: "Bruce Willis", image: "https://example.com/bruce.jpg" },
+      { name: "Alan Rickman", image: "https://example.com/alan.jpg" },
+      { name: "Bonnie Bedelia", image: "https://example.com/bonnie.jpg" },
+    ],
+    year: 1988,
+  },
+  // Add more movies for the top section
+  {
+    title: "Inglourious Basterds",
+    language: "English",
+    rating: 4.6,
+    category: "War",
+    duration: "2h 33m",
+    poster: "https://cdn.wallpapersafari.com/16/69/rcj6Cz.jpg ",
+    certificate: "U/A",
+    quality: "HD",
+    banner: "https://picsum.photos/800/400?random=20",
+    description: "Inglourious Basterds is a war film directed by Quentin Tarantino, involving a group of Jewish U.S. soldiers planning to assassinate Nazi leaders.",
+    cast: [
+      { name: "Brad Pitt", image: "https://example.com/brad.jpg" },
+      { name: "Diane Kruger", image: "https://example.com/diane.jpg" },
+      { name: "Christoph Waltz", image: "https://example.com/christoph.jpg" },
+    ],
+    year: 2009,
+  },
+  // Add more movies for the top section
+  {
+    title: "Gladiator",
+    language: "English",
+    certificate: "U/A",
+    rating: 4.7,
+    poster: "https://cdn.wallpapersafari.com/16/69/rcj6Cz.jpg ",
+    category: "Action",
+    duration: "2h 35m",
+    quality: "HD",
+    banner: "https://picsum.photos/800/400?random=21",
+    description: "Gladiator is an epic action film following a Roman general who seeks revenge against a corrupt emperor after being betrayed and reduced to slavery.",
+    cast: [
+      { name: "Russell Crowe", image: "https://example.com/russell.jpg" },
+      { name: "Joaquin Phoenix", image: "https://example.com/joaquin.jpg" },
+      { name: "Connie Nielsen", image: "https://example.com/connie.jpg" },
+    ],
+    year: 2000,
+  },
+  // Add more movies for the top section
+];
+
+const streamingNowData = [
+  {
+    title: "Stranger Things",
+    language: "English",
+    rating: 4.5,
+    category: "Drama",
+    duration: "5 Seasons",
+    poster: "https://resizing.flixster.com/0xxuABVVuzJrUT130WFHKE-irEg=/ems.cHJkLWVtcy1hc3NldHMvdHZzZWFzb24vNzUyMTFhOTktZTU4Ni00ODkyLWJlYjQtZTgxYTllZmU2OGM0LmpwZw==",
+    certificate: "U/A Rated",
+    quality: "UHD",
+    banner: " https://www.blackcoffeeseries.com/wp-content/uploads/2016/07/strangerthingsposter-1.jpg",
+    description: "Stranger Things is a popular TV series set in the 1980s, involving supernatural events in a small town and the search for a missing boy.",
+    cast: [
+      { name: "Millie Bobby Brown", image: "https://example.com/millie.jpg" },
+      { name: "Finn Wolfhard", image: "https://example.com/finn.jpg" },
+      { name: "Winona Ryder", image: "https://example.com/winona.jpg" },
+    ],
+    year: 2016,
+  },
+  // ... Existing entries ...
+  // Add more movies for the streaming now section
+  // New entries for the streaming now section
+  {
+    title: "Money Heist",
+    language: "Spanish , English",
+    rating: 4.8,
+    category: "Crime",
+    duration: "5 Seasons",
+    certificate: "U/A +16 Rated",
+    poster: "https://i0.wp.com/thsindex.org/wp-content/uploads/2023/04/Money-Heist-was-first-released-on-Antena-3-in-Spain-in-2017-Netflix.jpg?fit=1920%2C2560&ssl=1",
+    quality: "UHD",
+    banner: " https://wp-socialnation-assets.s3.ap-south-1.amazonaws.com/wp-content/uploads/2021/05/25185045/Money-Heist.png",
+    description: "Money Heist is a Spanish series about a criminal mastermind who recruits eight people with unique abilities to carry out a heist on the Royal Mint of Spain.",
+    cast: [
+      { name: "Úrsula Corberó", image: "https://example.com/ursula.jpg" },
+      { name: "Álvaro Morte", image: "https://example.com/alvaro.jpg" },
+      { name: "Itziar Ituño", image: "https://example.com/itziar.jpg" },
+    ],
+
+    episodes: [
+      { title: "Chapter One: The Vanishing of Will Byers", duration: "50m", poster: "https://picsum.photos/50/50?random=1" },
+      { title: "Chapter Two: The Weirdo on Maple Street", duration: "50m", poster: "https://picsum.photos/50/50?random=2" },
+      // ... Add more episodes with posters ...
+    ],
+
+    year: 2017,
+  },
+  // Add more movies for the streaming now section
+  {
+    title: "The Witcher",
+    language: "English",
+    rating: 4.7,
+    category: "Fantasy",
+    duration: "2 Seasons",
+    poster: "https://cdn.wallpapersafari.com/16/69/rcj6Cz.jpg ",
+    certificate: "U/A",
+    quality: "HD",
+    banner: "https://picsum.photos/800/400?random=23",
+    description: "The Witcher is a fantasy series based on the book series, following Geralt of Rivia as he battles monsters and navigates a world filled with magic.",
+    cast: [
+      { name: "Henry Cavill", image: "https://example.com/henry.jpg" },
+      { name: "Anya Chalotra", image: "https://example.com/anya.jpg" },
+      { name: "Freya Allan", image: "https://example.com/freya.jpg" },
+    ],
+    year: 2019,
+  },
+  // Add more movies for the streaming now section
+  {
+    title: "The Crown",
+    language: "English",
+    rating: 4.6,
+    certificate: "U/A",
+    category: "Drama",
+    duration: "5 Seasons",
+    poster: "https://cdn.wallpapersafari.com/16/69/rcj6Cz.jpg ",
+    quality: "HD",
+    banner: "https://picsum.photos/800/400?random=24",
+    description: "The Crown is a historical drama series chronicling the reign of Queen Elizabeth II and major historical events in the 20th century.",
+    cast: [
+      { name: "Olivia Colman", image: "https://example.com/olivia.jpg" },
+      { name: "Tobias Menzies", image: "https://example.com/tobias.jpg" },
+      { name: "Helena Bonham Carter", image: "https://example.com/helena.jpg" },
+    ],
+    year: 2016,
+  },
+  // Add more movies for the streaming now section
+  {
+    title: "Narcos",
+    language: "English",
+    certificate: "U/A",
+    rating: 4.7,
+    category: "Crime",
+    duration: "25 Min",
+    poster: "https://cdn.wallpapersafari.com/16/69/rcj6Cz.jpg ",
+    quality: "HD",
+    banner: "https://picsum.photos/800/400?random=25",
+    description: "Narcos is a crime drama series following the rise and fall of the notorious drug lord Pablo Escobar and the law enforcement's efforts to catch him.",
+    cast: [
+      { name: "Wagner Moura", image: "https://example.com/wagner.jpg" },
+      { name: "Pedro Pascal", image: "https://example.com/pedro.jpg" },
+      { name: "Boyd Holbrook", image: "https://example.com/boyd.jpg" },
+    ],
+    year: 2015,
+  },
+  // Add more movies for the streaming now section
+  {
+    title: "Black Mirror",
+    language: "English",
+    rating: 4.8,
+    category: "Sci-Fi",
+    certificate: "U/A",
+    poster: "https://cdn.wallpapersafari.com/16/69/rcj6Cz.jpg ",
+    duration: "5 Seasons",
+    quality: "HD",
+    banner: "https://picsum.photos/800/400?random=26",
+    description: "Black Mirror is an anthology series exploring the dark and often dystopian aspects of modern society and technology.",
+    cast: [
+      { name: "Various", image: "https://example.com/various.jpg" },
+    ],
+    year: 2011,
+  },
+  // Add more movies for the streaming now section
+];
+
+const latestMoviesData = [
+  {
+    title: "Spider-Man: No Way Home",
+    language: "English",
+    rating: 4.6,
+    category: "Sci-Fi , Superhero",
+    certificate: "U/A Rated",
+    poster: "https://images-na.ssl-images-amazon.com/images/S/pv-target-images/3c82c67bdbb947b8ed57ee9f4c89531bfc755426839b8598c275c799591c1288._RI_TTW_.jpg",
+    duration: "2h 28m",
+    quality: "HD",
+    banner: " https://www.searchhyderabad.com/wp-content/uploads/2022/05/Spider-Man-No-Way-Home-Amazon-prime.jpg",
+    description: "Spider-Man: No Way Home follows Spider-Man's journey across different dimensions as he teams up with other versions of Spider-Man.",
+    cast: [
+      { name: "Tom Holland", image: "https://example.com/tom.jpg" },
+      { name: "Zendaya", image: "https://example.com/zendaya.jpg" },
+      { name: "Alfred Molina", image: "https://example.com/alfred.jpg" },
+    ],
+    year: 2021,
+  },
+  // ... Existing entries ...
+  // Add more movies for the latest section
+  // New entries for the latest section
+  {
+    title: "No Time to Die",
+    language: "English",
+    rating: 4.8,
+    certificate: "U/A",
+    category: "Action",
+    duration: "2h 43m",
+    poster: "https://cdn.wallpapersafari.com/16/69/rcj6Cz.jpg ",
+    quality: "HD",
+    banner: "https://picsum.photos/800/400?random=27",
+    description: "No Time to Die is the 25th James Bond film, following Bond's retirement until an old friend turns up, leading him to the trail of a dangerous villain.",
+    cast: [
+      { name: "Daniel Craig", image: "https://example.com/daniel.jpg" },
+      { name: "Rami Malek", image: "https://example.com/rami.jpg" },
+      { name: "Léa Seydoux", image: "https://example.com/lea.jpg" },
+    ],
+    year: 2021,
+  },
+  // Add more movies for the latest section
+  {
+    title: "Dune",
+    language: "English",
+    rating: 4.7,
+    category: "Sci-Fi",
+    certificate: "U/A",
+    duration: "2h 35m",
+    poster: "https://cdn.wallpapersafari.com/16/69/rcj6Cz.jpg ",
+    quality: "HD",
+    banner: "https://picsum.photos/800/400?random=28",
+    description: "Dune is an epic science fiction film based on Frank Herbert's novel, set in a distant future where noble families vie for control of a desert planet.",
+    cast: [
+      { name: "Timothée Chalamet", image: "https://example.com/timothee.jpg" },
+      { name: "Rebecca Ferguson", image: "https://example.com/rebecca.jpg" },
+      { name: "Oscar Isaac", image: "https://example.com/oscar.jpg" },
+    ],
+    year: 2021,
+  },
+  // Add more movies for the latest section
+  {
+    title: "A Quiet Place Part II",
+    language: "English",
+    rating: 4.6,
+    poster: "https://cdn.wallpapersafari.com/16/69/rcj6Cz.jpg ",
+    category: "Horror",
+    duration: "1h 37m",
+    certificate: "U/A",
+    quality: "HD",
+    banner: "https://picsum.photos/800/400?random=29",
+    description: "A Quiet Place Part II is a horror sequel where a family must navigate and survive in a world where sound-hunting creatures lurk.",
+    cast: [
+      { name: "Emily Blunt", image: "https://example.com/emily.jpg" },
+      { name: "Cillian Murphy", image: "https://example.com/cillian.jpg" },
+      { name: "Millicent Simmonds", image: "https://example.com/millicent.jpg" },
+    ],
+    year: 2021,
+  },
+  // Add more movies for the latest section
+  {
+    title: "Jungle Cruise",
+    language: "English",
+    rating: 4.5,
+    category: "Adventure",
+    certificate: "U/A",
+    poster: "https://cdn.wallpapersafari.com/16/69/rcj6Cz.jpg ",
+    duration: "2h 7m",
+    quality: "HD",
+    banner: "https://picsum.photos/800/400?random=30",
+    description: "Jungle Cruise is an adventure film inspired by the Disney theme park attraction, following a riverboat captain and a scientist on a dangerous journey.",
+    cast: [
+      { name: "Dwayne Johnson", image: "https://example.com/dwayne.jpg" },
+      { name: "Emily Blunt", image: "https://example.com/emily_jungle.jpg" },
+      { name: "Jack Whitehall", image: "https://example.com/jack.jpg" },
+    ],
+    year: 2021,
+  },
+  // Add more movies for the latest section
+  {
+    title: "The French Dispatch",
+    poster: "https://cdn.wallpapersafari.com/16/69/rcj6Cz.jpg ",
+    language: "English",
+    rating: 4.6,
+    category: "Comedy",
+    duration: "1h 48m",
+    certificate: "U/A",
+    quality: "HD",
+    banner: "https://picsum.photos/800/400?random=31",
+    description: "The French Dispatch is a comedy-drama anthology film centered around the final issue of an American magazine published in a fictional French city.",
+    cast: [
+      { name: "Benicio del Toro", image: "https://example.com/benicio.jpg" },
+      { name: "Adrien Brody", image: "https://example.com/adrien.jpg" },
+      { name: "Tilda Swinton", image: "https://example.com/tilda.jpg" },
+    ],
+    year: 2021,
+  },
+  // Add more movies for the latest section
+];
+
+const bollywoodData = [
+  {
+    title: "Pattan",
+    poster: "https://www.tallengestore.com/cdn/shop/products/Pathan-ShahRukhKhan-BollywoodSuperhitHindiMoviePoster_ce29dea2-91e6-43b6-81cc-1e2e0a1c1ae0.jpg?v=1675251704 ",
+    language: "Hindi",
+    rating: 4.9,
+    category: "Romance",
+    certificate: "U/A",
+    duration: "3h 10m",
+    quality: "HD",
+    banner: " https://dgcs.gos.pk/blogs/wp-content/uploads/2023/02/18059e5332.jpg",
+    description: "A Pakistani general hires a private terror outfit to conduct attacks in India while Pathaan, an Indian secret agent, is on a mission to form a special unit.",
+    cast: [
+      { name: "Shah Rukh Khan", image: "https://example.com/shahrukh.jpg" },
+      { name: "Kajol", image: "https://example.com/kajol.jpg" },
+      { name: "Amrish Puri", image: "https://example.com/amrish.jpg" },
+    ],
+    year: 1995,
+  },
+  // ... Existing entries ...
+  // Add more movies for the bollywood section
+  // New entries for the bollywood section
+  {
+    title: "Bahubali: The Beginning",
+    language: "Telugu",
+    rating: 4.8,
+    poster: "https://cdn.wallpapersafari.com/16/69/rcj6Cz.jpg ",
+    category: "Action",
+    duration: "2h 39m",
+    certificate: "U/A",
+    quality: "HD",
+    banner: "https://picsum.photos/800/400?random=32",
+    description: "Bahubali: The Beginning is an epic action film set in the fictional kingdom of Mahishmati, following the rise of a young warrior.",
+    cast: [
+      { name: "Prabhas", image: "https://example.com/prabhas.jpg" },
+      { name: "Rana Daggubati", image: "https://example.com/rana.jpg" },
+      { name: "Anushka Shetty", image: "https://example.com/anushka.jpg" },
+      { name: "Anushka Shetty", image: "https://example.com/anushka.jpg" },
+      { name: "Anushka Shet", image: "https://example.com/anushka.jpg" },
+      { name: "Anushka Shetty", image: "https://example.com/anushka.jpg" },
+      { name: "Anushka Shetty", image: "https://example.com/anushka.jpg" },
+     
+    ],
+    year: 2015,
+  },
+  // Add more movies for the bollywood section
+  {
+    title: "3 Idiots",
+    language: "Hindi",
+    rating: 4.8,
+    poster: "https://cdn.wallpapersafari.com/16/69/rcj6Cz.jpg ",
+    category: "Comedy",
+    duration: "2h 50m",
+    certificate: "U/A",
+    quality: "HD",
+    banner: "https://picsum.photos/800/400?random=33",
+    description: "3 Idiots is a comedy-drama film following three engineering students as they embark on a journey to find their lost friend.",
+    cast: [
+      { name: "Aamir Khan", image: "https://example.com/aamir.jpg" },
+      { name: "R. Madhavan", image: "https://example.com/madhavan.jpg" },
+      { name: "Sharman Joshi", image: "https://example.com/sharman.jpg" },
+    ],
+    year: 2009,
+  },
+  // Add more movies for the bollywood section
+  {
+    title: "Padmaavat",
+    language: "Hindi",
+    rating: 4.7,
+    certificate: "U/A",
+    category: "Drama",
+    duration: "2h 44m",
+    poster: "https://cdn.wallpapersafari.com/16/69/rcj6Cz.jpg ",
+    quality: "HD",
+    banner: "https://picsum.photos/800/400?random=34",
+    description: "Padmaavat is a historical drama film based on the epic poem 'Padmavat', depicting the story of the Rajput queen Padmavati.",
+    cast: [
+      { name: "Deepika Padukone", image: "https://example.com/deepika.jpg" },
+      { name: "Shahid Kapoor", image: "https://example.com/shahid.jpg" },
+      { name: "Ranveer Singh", image: "https://example.com/ranveer.jpg" },
+    ],
+    year: 2018,
+  },
+  // Add more movies for the bollywood section
+  {
+    title: "Kabhi Khushi Kabhie Gham...",
+    language: "Hindi",
+    rating: 4.7,
+    category: "Drama",
+    duration: "3h 31m",
+    certificate: "U/A",
+    poster: "https://cdn.wallpapersafari.com/16/69/rcj6Cz.jpg ",
+    quality: "HD",
+    banner: "https://picsum.photos/800/400?random=35",
+    description: "Kabhi Khushi Kabhie Gham... is a family drama film following a wealthy family's relationships and conflicts across generations.",
+    cast: [
+      { name: "Shah Rukh Khan", image: "https://example.com/shahrukh_k3g.jpg" },
+      { name: "Kajol", image: "https://example.com/kajol_k3g.jpg" },
+      { name: "Amitabh Bachchan", image: "https://example.com/amitabh.jpg" },
+    ],
+    year: 2001,
+  },
+  // Add more movies for the bollywood section
+  {
+    title: "Lagaan: Once Upon a Time in India",
+    language: "Hindi",
+    rating: 4.8,
+    category: "Drama",
+    duration: "3h 44m",
+    certificate: "U/A",
+    poster: "https://example.com/inception_poster.jpg",
+    quality: "HD",
+    banner: "https://picsum.photos/800/400?random=36",
+    description: "Lagaan: Once Upon a Time in India is a sports drama film set in British-ruled India, where a group of villagers challenge British officers to a cricket match.",
+    cast: [
+      { name: "Aamir Khan", image: "https://example.com/aamir_lagaan.jpg" },
+      { name: "Gracy Singh", image: "https://example.com/gracy.jpg" },
+      { name: "Rachel Shelley", image: "https://example.com/rachel.jpg" },
+    ],
+    year: 2001,
+  },
+  // Add more movies for the bollywood section
+];
+
+    // Function to create and append movie cards
+    function createMovieCard(movie) {
+      const movieCard = document.createElement("div");
+      movieCard.classList.add("movie-card");
+
+ // Create an image element for the poster
+if (movie.poster) {
+  const posterImg = document.createElement("img");
+  posterImg.src = movie.poster;  // Set the image source to the poster URL
+  posterImg.alt = movie.title;   // Set the alt attribute for accessibility
+  posterImg.classList.add("poster-image");  // You can add a CSS class for styling
+
+  // Add an 'onerror' event handler to the image
+  posterImg.onerror = function() {
+    // If the poster image fails to load, set a fallback image
+    posterImg.src = " https://static.thenounproject.com/png/4381137-200.png"; // Replace with the URL of the fallback image
+    posterImg.alt = "Fallback Image"; // Set a generic alt text for the fallback image
+    posterImg.classList.add("fallback"); // Add the 'fallback' class to the fallback image
+  };
+
+  // Append the poster image to the movie card
+  movieCard.appendChild(posterImg);
+} else {
+  // If there's no poster URL provided in the movie data
+  console.warn("No poster image URL provided for movie:", movie.title);
+}
+
+
+
+
+      const movieDetails = document.createElement("div");
+      movieDetails.classList.add("movie-details");
+
+      const categorySpan = document.createElement("span");
+      categorySpan.classList.add("category");
+      categorySpan.textContent = movie.category;
+      movieDetails.appendChild(categorySpan);
+
+      const titleHeading = document.createElement("h3");
+      titleHeading.classList.add("title");
+      titleHeading.textContent = movie.title;
+      movieDetails.appendChild(titleHeading);
+
+      const languagePara = document.createElement("p");
+  languagePara.classList.add("language");
+  languagePara.textContent = ` ${movie.language}`;
+
+  movieDetails.appendChild(languagePara);
+
+  const yearPara = document.createElement("p");
+  yearPara.classList.add("year"); // You can add CSS styling for this class
+  yearPara.textContent = ` ${movie.year}`; // Include year here
+  movieDetails.appendChild(yearPara);
+
+      const qualitySpan = document.createElement("span");
+      qualitySpan.classList.add("quality");
+      qualitySpan.textContent = movie.quality;
+      
+      movieDetails.appendChild(qualitySpan);
+
+      const ratingsDiv = document.createElement("div");
+      ratingsDiv.classList.add("ratings");
+      ratingsDiv.innerHTML = getStarRatingHTML(movie.rating);
+      movieDetails.appendChild(ratingsDiv);
+
+      movieCard.appendChild(movieDetails);
+
+      return movieCard;
+    }
+
+    // Function to handle card click and pass data to the result page
+    function handleCardClick(movie) {
+      const urlParams = new URLSearchParams();
+      urlParams.set("movieData", JSON.stringify(movie));
+
+      // For simplicity, we are using a relative path for the result page
+      window.location.href = `result-page.html?${urlParams.toString()}`;
+    }
+
+    // Function to get the star rating HTML based on ratings
+    function getStarRatingHTML(ratings) {
+      const starCount = Math.floor(ratings);
+      const hasHalfStar = ratings % 1 !== 0;
+      let starHTML = "";
+
+      for (let i = 1; i <= 5; i++) {
+        if (i <= starCount) {
+          starHTML += '<i class="star fas fa-star"></i>';
+        } else if (hasHalfStar && i === starCount + 1) {
+          starHTML += '<i class="star fas fa-star-half-alt"></i>';
+        } else {
+          starHTML += '<i class="star far fa-star"></i>';
+        }
+      }
+
+      return starHTML;
+    }
+
+    // Function to create and append movie cards with animation
+    function createMovieCardWithAnimation(movie) {
+      const movieCard = createMovieCard(movie);
+      movieCard.style.transform = "translateX(100%)"; // Initial position off to the right
+
+      // Wait for the next animation frame to apply the animation class
+      requestAnimationFrame(() => {
+        movieCard.style.transform = "translateX(0)"; // Final position
+      });
+
+      // Attach the click event listener to the movie card
+      movieCard.addEventListener("click", () => handleCardClick(movie));
+
+      return movieCard;
+    }
+
+    // Function to add movie cards to a specific section with animation
+    function addMovieCardsWithAnimation(sectionId, movieData) {
+      const sectionContainer = document.getElementById(sectionId);
+
+      movieData.forEach((movie, index) => {
+        const movieCard = createMovieCardWithAnimation(movie);
+        const delay = index * 100; // Delay each card insertion by 100ms
+
+        // Apply a delay to each card insertion to create a smooth animation
+        setTimeout(() => {
+          sectionContainer.appendChild(movieCard);
+        }, delay);
+      });
+    }
+
+    // Function to initialize the movie sliders
+    function initializeMovieSliders() {
+      addMovieCardsWithAnimation("popular-movies", popularMoviesData);
+      addMovieCardsWithAnimation("top-movies", topMoviesData);
+      addMovieCardsWithAnimation("streaming-now", streamingNowData);
+      addMovieCardsWithAnimation("latest-movies", latestMoviesData);
+      addMovieCardsWithAnimation("bollywood-movies", bollywoodData);
+    }
+
+    // Call the initializeMovieSliders function to populate movie cards
+    initializeMovieSliders();
+  </script>
+</body>
+
+</html>

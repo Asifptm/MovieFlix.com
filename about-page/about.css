@@ -1,0 +1,91 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #000;
+    color: #fff;
+  }
+  .profile-card {
+    max-width: 300px;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #1a1a1a;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+  }
+  .profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    background-color: #ccc; /* You can add an actual image URL here */
+    background-size: cover;
+  }
+  .username {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  .subheading {
+    font-size: 14px;
+    color: #ff4444;
+    margin-bottom: 20px;
+  }
+  .web-developer {
+    font-size: 24px;
+    font-weight: bold;
+    display: inline-block;
+    position: relative;
+  }
+  .blinking-caret::after {
+    content: "|";
+    display: inline-block;
+    animation: blink-caret 1s step-end infinite;
+    color: #ff4444;
+  }
+  @keyframes blink-caret {
+    50% {
+      opacity: 0;
+    }
+  }
+  .follow-me {
+    font-size: 20px;
+    margin-top: 20px;
+    font-weight: bold;
+    color: #f50707;
+    margin-bottom: 10px;
+  }
+  .social-media {
+    font-size: 28px;
+    margin-top: 20px;
+  }
+  .social-media a {
+    display: inline-block;
+    color: #fff;
+    margin: 0 10px;
+    text-decoration: none;
+    background-color: #444;
+    padding: 5px;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    transition: color 0.3s, background-color 0.3s;
+  }
+
+  .social-media a i{
+    font-size: 25px;
+  }
+
+  .about-us {
+    font-size: 24px;
+    font-weight: bold;
+    color: #f0eeee;
+    margin-bottom: 20px;
+  }
+
+
+
+  .social-media a:hover {
+    color: #f1ee0c;
+    background-color: #555;
+    transform: scale(1.1);
+  }

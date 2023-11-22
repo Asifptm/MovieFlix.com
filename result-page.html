@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Details</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+  body {
+  margin: 0;
+  padding: 0;
+  background-color: #000000; /* Dark background color */
+  color: #ffffff; /* Light text color */
+  font-family: Arial, sans-serif;
+}
+.banner {
+  position: relative;
+  width: 100%;
+  
+  overflow: hidden;
+}
+
+.banner-image-container {
+  position: relative;
+  
+}
+
+.banner-image-container img {
+  width: 100%;
+  margin-top: 3px;
+  border-radius: 3px;
+ 
+ object-fit: cover;
+  margin-left: 5px;
+      margin-right: 10px;
+  max-height:550px;
+  display: block;
+}
+
+.banner-image-container::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60%; /* Adjust the height of the gradient */
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgb(0, 0, 0)); /* Gradient colors */
+  pointer-events: none;
+}
+
+.movie-year {
+  font-size: 16px;
+  color: #d3d0d0;
+  font-weight: bold;
+  margin-left: 10px;
+  margin-top: 5px;
+}
+.movie-title {
+  font-size: 28px;
+  margin-left: 20px;
+  font-family: "Helvetica", sans-serif; 
+}
+
+.rating {
+  font-size: 15px;
+  margin-left:20px;
+   color: #f70b0b; /* Adjust the color of the rating stars */
+  margin-top: 10px;
+ margin-left:5px;
+}
+
+.rating i {
+  margin-right: 5px;
+}
+
+.rating-digit  {
+  font-size: 18px;
+  font-weight: bold;
+ color: #f1f1f1;
+}
+
+.movie-details {
+  margin-top: 20px;
+  margin-left:15px;
+  
+}
+
+.movie-details span {
+  font-size: 14px;
+  margin-right: 10px;
+  margin-top: 10px;
+  font-weight: bold;
+  padding: 6px 8px;
+   background-color: #1b1717;
+  color: #f1f1f1;
+  border-radius: 20px;
+}
+
+.movie-details i{
+   margin-right: 5px;
+   color: rgb(243, 10, 10);
+}
+
+.cast-info {
+  margin-top: 15px;
+}
+
+.cast-info h2 {
+  font-size: 20px;
+  margin: 0;
+  padding-left: 20px;
+  position: relative;
+}
+
+.cast-info h2::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background-color: red;
+}
+
+.cast-slider {
+  overflow-x: scroll;
+  /* Optional: Hide scrollbar */
+  scrollbar-width: flex; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer */
+  &::-webkit-scrollbar {
+    display: none; /* WebKit */
+  }
+}
+
+.cast-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+  display: flex;
+}
+
+.cast-list li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.cast-list li:last-child {
+  margin-right: 0;
+}
+
+.cast-list img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 5px;
+}
+/* ... (previous styles) ... */
+
+
+
+
+
+
+.movie-language {
+  font-size: 14px;
+ 
+ margin-left:10px;
+ background-color: #0c0909;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  padding: 5px 4px;
+  width: fit-content;
+  font-family: "Arial", sans-serif; /* Custom font-family */
+  color: #a5a5a5; /* Custom color for the language text */
+}
+/* ... (previous styles) ... */
+
+
+
+@media screen and (max-width: 768px) {
+  
+  .cast-slider {
+    overflow-x: auto; /* Allow horizontal scrolling on small screens */
+  }
+
+  .cast-list li {
+    margin-right: 10px;
+    
+  }
+
+  .cast-list img {
+    width: 50px;
+    height: 50px;
+  }
+
+  
+.banner-image-container img {
+ 
+  max-height:600px;
+  display: block;
+}
+
+}
+
+
+.movie-description {
+  padding: 20px 0;
+ 
+  margin-top:20px;
+}
+
+.movie-description h2 {
+  font-size: 20px;
+  margin: 0;
+  margin-left: 20px;
+  padding-left: 20px; /* Added to create space for the pseudo-element */
+  position: relative; /* Added for positioning the pseudo-element */
+}
+
+.movie-description p{
+  margin-left: 30px;
+}
+
+.movie-description h2::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -10px;
+  width: 3px;
+  height: 105%;
+  background-color: red; /* Adjust the color of the vertical line */
+}
+
+
+
+.movie-actions {
+  display: flex;
+  align-items: center;
+  margin-top: 35px;
+}
+
+.action-icon {
+  margin-left: 15px;
+  display: flex;
+  align-items: center;
+  color: #fafafa; /* Adjust the color of the action icons */
+}
+
+.action-icon i {
+  font-size: 24px;
+  margin-left: 10px;
+}
+
+.extra-info {
+  margin-top: 30px;
+  display: flex;
+  justify-content: left; /* Center the elements horizontally */
+  flex-wrap: wrap; /* Allow items to wrap into multiple rows */
+  margin-left:15px;
+}
+
+.download-button {
+  display: inline-block;
+  padding: 10px 20px;
+background-color: red;
+  color: #ffffff; /* Add text color to the download button */
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 5px;
+}
+.download-button:hover{
+   background-color: #dbd81e;
+   color: #000000;
+  
+}
+
+.more-info {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #6c5ce7; /* Add background color to the more info section */
+  color: #ffffff; /* Add text color to the more info section */
+  border-radius: 20px;
+  font-size: 16px;
+  text-decoration: none;
+  margin: 5px;
+}
+.more-info:hover{
+   background-color: #6c5ce7
+}
+
+
+/* Responsive styles for mobile devices */
+@media (max-width: 767px) {
+  
+ 
+  
+  .rating{
+    margin-left:10px;
+  }
+  
+  .movie-details span i{
+    font-size:13px;
+  }
+  .movie-title{
+    margin-top:10px;
+    margin-left:10px;
+  }
+
+  
+  .action-icon i {
+  font-size: 25px;
+  margin-left: 10px;
+    
+}
+  .movie-details {
+  margin-top: 20px;
+  margin-left:10px;
+  
+}
+  
+  .movie-details-container {
+    padding: 4px;
+    font-size:14px;
+    position: static; /* Reset the position to static for stacking content */
+    background-color: #020202; /* Revert background color to solid white */
+  }
+
+  .movie-title {
+    font-size: 20px;
+  }
+  .movie-details {
+    font-size:12px;
+  }
+
+  .movie-details span {
+    font-size: 14px; /* Reduce font size for mobile */
+  }
+
+  .movie-description h2 {
+    font-size: 18px;
+  }
+
+  .extra-info {
+    flex-direction: column; /* Arrange elements in a single column */
+    align-items: center;/* Center the elements vertically */
+   
+  }
+
+  
+  
+  .movie-details span {
+    font-size:12px;
+  }
+  
+  .download-button,
+  .more-info {
+    font-size: 13px; /* Reduce font size for mobile */
+    padding: 8px 10px; /* Adjust padding for mobile */
+  width:60%;
+    margin-top:10px;
+    margin-right:50px;
+   
+    text-align:center;
+  }
+}
+
+
+.share-popup {
+  display: none;
+  position: absolute;
+  bottom: 120px;
+  right: 50px;
+  background-color: #ffffff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  padding: 40px 70px;
+  z-index: 1;
+}
+
+.show {
+  display: block;
+}
+
+.popup-close {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.popup-close i {
+  color: #555;
+}
+
+.social-icons {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.social-icons li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.social-icons li:last-child {
+  margin-right: 0;
+}
+
+.social-icons a {
+  display: block;
+  color: #555;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+
+
+.red-heart {
+  color: red; /* Change the color of the heart icon to red */
+}
+
+.movie-certificate {
+  font-size: 14px;
+  width: fit-content;
+  color: #020101;
+  margin-left: 10px;
+  background-color: #ffc107;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+
+/* Style for episode section */
+.episodes {
+  margin-top: 20px;
+  margin-left: 10px;
+  display: none; /* Hide by default */
+}
+
+/* Style for episode list */
+.episode-list {
+  list-style: none;
+
+ 
+}
+
+.episode-details {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  margin-bottom: 10px;
+ 
+}
+
+.episode-poster {
+  width: 50px;
+  height: 50px;
+  object-fit:contain ;
+  margin-right: 10px;
+  border-radius: 5px;
+}
+
+.episode-info {
+  flex: 1;
+}
+
+.episode-title {
+  font-weight: bold;
+  margin: 0;
+}
+
+.episode-duration {
+  margin: 0;
+  color: #888;
+}
+/* Responsive styling */
+@media (max-width: 768px) {
+  .episodes {
+    margin-top: 10px;
+  }
+
+  .episode-details {
+    margin-bottom: 5px;
+  }
+
+  .episode-poster {
+    width: 40px;
+    height: 40px;
+    margin-right: 5px;
+    border-radius: 5px;
+  }
+
+  .episode-title {
+    font-size: 14px;
+  }
+
+  .episode-duration {
+    font-size: 12px;
+  }
+}
+</style>
+<body>
+  <div class="banner">
+    <div class="banner-image-container">
+      <img src="" alt="Banner Image" id="bannerImage">
+    </div>
+    <div class="movie-details-container">
+      <h1 class="movie-title" id="movieTitle"></h1>
+      <p class="movie-language" id="movieLanguage"></p>
+      <p class="movie-year" id="movieYear"></p>
+      <p class="movie-certificate" id="movieCertificate"></p>
+      <div class="rating" id="movieRating">
+        <!-- Rating stars will be dynamically added here -->
+      </div>
+      <div class="movie-details" id="movieDetails">
+        <!-- Movie details like category, duration, quality will be dynamically added here -->
+      </div>
+      <div class="movie-description" id="movieDescription">
+        <!-- Movie description will be dynamically added here -->
+      </div>
+      <div class="cast-info" id="castInfo">
+        <h2>Cast</h2>
+        <div class="cast-slider" id="castSlider">
+          <ul class="cast-list" id="castList">
+            <!-- Cast members will be dynamically added here -->
+          </ul>
+        </div>
+      </div>
+
+      <div class="movie-actions">
+        <span class="action-icon">
+          <i class="fas fa-heart" id="heartIcon" onclick="toggleHeartIconColor()"></i>
+        </span>
+        <span class="action-icon share-icon" onclick="toggleSharePopup()">
+          <i class="fas fa-share-alt"></i>
+        </span>
+        <span class="action-icon">
+          <i class="far fa-bookmark"></i>
+        </span>
+      </div>
+
+      <div class="extra-info">
+        <a href="#" class="download-button">
+          <i class="fas fa-download"></i> Download Now
+        </a>
+        <span class="more-info" onclick="toggleMoreInfo()">
+          <i class="fas fa-info-circle"></i> More Info
+        </span>
+      </div>
+    </div>
+
+    <div class="share-popup" id="sharePopup">
+      <span class="popup-close" onclick="toggleSharePopup()">
+        <i class="fas fa-times"></i>
+      </span>
+      <ul class="social-icons">
+        <li><a href="#"><i class="fab fa-facebook"></i></a>Facebook</li>
+        <li><a href="#"><i class="fab fa-twitter"></i></a> twitter</li>
+        <li><a href="#"><i class="fab fa-instagram"></i></a>instagram</li>
+        <li><a href="#"><i class="fab fa-whatsapp"></i></a>whatsapp</li>
+      </ul>
+    </div>
+  </div>
+
+
+
+      <div class="episodes" id="episodeSection">
+        <h3>Episodes:</h3>
+        <ul class="episode-list"></ul>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+
+
+function toggleSharePopup() {
+   const sharePopup = document.getElementById('sharePopup');
+   sharePopup.classList.toggle('show');
+ }
+
+ function toggleHeartIconColor() {
+   const heartIcon = document.getElementById('heartIcon');
+   heartIcon.classList.toggle('red-heart');
+ }
+
+
+   // Get the movie data from URL parameters
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const movieDataJSON = urlParams.get("movieData");
+const movieData = JSON.parse(movieDataJSON);
+
+// Function to display rating stars
+function displayRatingStars(rating) {
+  const ratingContainer = document.querySelector(".rating");
+  ratingContainer.innerHTML = "";
+
+  const fullStars = Math.floor(rating);
+  const halfStar = rating % 1 !== 0;
+
+  for (let i = 0; i < fullStars; i++) {
+    const star = document.createElement("i");
+    star.className = "fas fa-star";
+    ratingContainer.appendChild(star);
+  }
+
+  if (halfStar) {
+    const halfStar = document.createElement("i");
+    halfStar.className = "fas fa-star-half-alt";
+    ratingContainer.appendChild(halfStar);
+  }
+
+  const emptyStars = 5 - Math.ceil(rating);
+  for (let i = 0; i < emptyStars; i++) {
+    const star = document.createElement("i");
+    star.className = "far fa-star";
+    ratingContainer.appendChild(star);
+  }
+
+  const ratingDigit = document.createElement("span");
+  ratingDigit.textContent = rating.toFixed(1);
+  ratingContainer.appendChild(ratingDigit);
+}
+
+// Function to update the episode section
+function updateEpisodeSection(movie) {
+  const episodeSection = document.getElementById('episodeSection');
+  const episodeList = document.querySelector('.episode-list');
+
+  if (movie.episodes && movie.episodes.length > 0) {
+    // Show the episode section for streaming data
+    episodeSection.style.display = 'block';
+
+    // Populate the episode list
+    let episodeHTML = "";
+    movie.episodes.forEach((episode) => {
+      episodeHTML += `
+        <li>
+          <div class="episode-details">
+            <img src="${episode.poster}" alt="${episode.title} Poster" class="episode-poster">
+            <div class="episode-info">
+              <p class="episode-title">${episode.title}</p>
+              <p class="episode-duration">${episode.duration}</p>
+            </div>
+          </div>
+        </li>
+      `;
+    });
+    episodeList.innerHTML = episodeHTML;
+  } else {
+    // Hide the episode section if there are no episodes
+    episodeSection.style.display = 'none';
+  }
+}
+
+// Function to update movie details
+function updateMovieDetails(movie) {
+  document.getElementById("bannerImage").setAttribute("src", movieData.banner);
+  document.getElementById('movieYear').textContent = `  ${movie.year}`;
+  document.getElementById("movieTitle").textContent = movie.title;
+  document.getElementById("movieLanguage").textContent = ` ${movie.language}`;
+  document.getElementById('movieCertificate').textContent = ` ${movie.certificate}`;
+  document.querySelector(".movie-description").innerHTML = `
+    <h2>Description</h2>
+    <p>${movie.description}</p>
+  `;
+
+  const movieDetails = document.getElementById("movieDetails");
+  movieDetails.innerHTML = `
+    <span class="category"><i class="fas fa-tag"></i> ${movie.category}</span>
+    <span class="duration"><i class="fas fa-clock"></i> ${movie.duration}</span>
+    <span class="quality"><i class="fas fa-video"></i> ${movie.quality}</span>
+  `;
+  const castList = document.getElementById("castList");
+let castHTML = "";
+movie.cast.forEach((cast) => {
+  castHTML += `
+    <li>
+      <img src="${cast.image}" alt="${cast.name}" onerror="this.src=' https://img.freepik.com/free-icon/user_318-159711.jpg'; this.alt='Fallback Cast Image';">
+      <p>${cast.name}</p>
+    </li>
+  `;
+});
+castList.innerHTML = castHTML;
+
+  // Update the episode section
+  updateEpisodeSection(movie);
+}
+
+// Update the movie details on the result page
+updateMovieDetails(movieData);
+
+// Display the rating stars on the result page
+displayRatingStars(movieData.rating);
+
+
+  
+  </script>
+    
+  </body>
+
+</html>

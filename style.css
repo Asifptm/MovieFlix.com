@@ -1,0 +1,738 @@
+
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #e9e8e8;
+}
+
+.content {
+  flex-grow: 1;
+  padding: 10px;
+  background-color: #fafafa;
+  
+}
+
+.navbar {
+  background-color: #0e0d0d;
+  color: #fff;
+  display: none; /* Hide the navbar by default */
+  justify-content: space-around;
+  align-items: center;
+  padding: 8px;
+  position: fixed; /* Fixed position for mobile view */
+  bottom: 0;
+  left: 0;
+  width: 100%; /* Full width */
+  z-index: 1;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #a1a1a1;
+  margin: 0;
+  padding: 10px 15px; /* Adjust padding to provide space for the icons */
+  font-size: 18px; /* Increase font size for better visibility */
+  position: relative;
+  transition: color 0.3s;
+}
+
+
+.nav-link:hover{
+  color: #D90000;
+}
+
+.tab-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #e50914;
+  transform: scaleX(0);
+  transition: transform 0.3s ease-in-out;
+}
+
+.nav-link.active .tab-line {
+  transform: scaleX(1);
+}
+
+.nav-link .tab-line {
+  transform-origin: left;
+}
+
+/* Show the navbar on screens narrower than 769px (adjust as needed) */
+@media (max-width: 768px) {
+  .navbar {
+      display: flex;
+  }
+  
+  .nav-link {
+      font-size: 20px; /* Reduce font size for smaller screens */
+  }
+}
+
+
+
+
+
+
+.section-title {
+  position: relative;
+  font-size: 20px;
+  margin-left: 10px;
+  padding-left: 30px; /* Increased padding to accommodate the icon */
+  color: #0e0808; /* White text color */
+  margin-bottom: 10px;
+}
+
+
+.section-title::before {
+  content: '\25BA'; /* Unicode arrow character (Right-pointing triangle) */
+  position: absolute;
+  left: 0;
+  top: 0;
+  align-items: center;
+  font-size: 16px;
+  border-radius: 50%; /* Adding border radius */
+  background-color: #ec1212; /* Background color of the triangle */
+  color: #0f0707; /* Color of the triangle */
+  padding: 2px; /* Adjust the padding to control the size of the triangle */
+}
+
+
+
+.movie-slider {
+  display: flex;
+  margin-top: 10px;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  width: 100%;
+ margin-bottom: 20px;
+ padding: 20px;
+ border-radius: 6px;
+
+ box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  max-width: 1260px;
+  margin: 20px auto;
+}
+
+/* Customize the scrollbar */
+.movie-slider::-webkit-scrollbar {
+  margin-bottom: 20px;
+  
+  width: 4px; /* Width of the scrollbar */
+}
+
+/* Track (background) of the scrollbar */
+.movie-slider::-webkit-scrollbar-track {
+  margin-left: 10px;
+  margin-right: 5px;
+margin-bottom: 10px;
+border-radius: 6px;
+  background: #dbdbdb; /* Light gray color */
+}
+
+/* Handle (thumb) of the scrollbar */
+.movie-slider::-webkit-scrollbar-thumb {
+  background: #ff0b0b; /* Red color for the thumb */
+  border-radius: 4px; /* Rounded corners for the thumb */
+  margin-bottom: 10px;
+}
+
+
+    .movie-card {
+      flex: 0 0 auto;
+      width:50%;
+      max-width: 250px;
+     
+    margin: 5px;
+      background-color: #e7e7e7; /* Dark gray background */
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+      overflow: hidden;
+      scroll-snap-align: center;
+      position: relative;
+      animation: slideInFromRight 0.5s ease;
+    }
+
+    .movie-card img {
+      width: 100%;
+      height: auto;
+      
+     object-fit:cover;
+     
+      
+    }
+
+    .movie-details {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 15px;
+      transform: translateY(100%);
+      transition: transform 0.3s;
+      font-family: "Arial", sans-serif;
+      color: #ffffff; /* White text color */
+      text-align: left;
+      background-image: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%);
+    }
+
+    .movie-card:hover .movie-details {
+      transform: translateY(0);
+    }
+
+    .category {
+      display: inline-block;
+      background-color: #ffcc00;
+      color: #000000; /* Black text color */
+      padding: 5px 10px;
+      border-radius: 3px;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    .title {
+      margin-top: 10px;
+      margin-bottom: 15px;
+      font-size: 18px;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+      
+      color: #ffffff; /* White text color */
+    }
+
+    .language {
+      font-size: 14px;
+      text-align: left;
+      color: #ffffff; /* White text color */
+    }
+
+    .year {
+  color: #fefeff;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: left;
+  text-transform: uppercase;
+}
+/* CSS for the poster image and fallback image */
+.poster-image {
+  display: block;
+ 
+  max-width: 100%; /* Ensure the image doesn't exceed its container's width */
+  height: auto; /* Maintain the aspect ratio */
+  transition: opacity 0.3s ease; /* Smooth transition on image load/fade */
+}
+
+.poster-image.fallback {
+  align-items: center;
+  object-fit: cover;
+  
+  background-color: #f0f0f0; /* Light gray background color for the fallback image */
+  opacity: 0.7; /* Reduced opacity for the fallback image */
+  padding: 10px; /* Add padding to create some spacing around the image */
+  box-sizing: border-box; /* Include padding in the total element size */
+}
+
+
+
+
+
+
+    .quality {
+      display: block;
+      font-size: 14px;
+     border: 2px solid #ffbb00;
+     padding: 5px  8px;
+     width: fit-content;
+     border-radius: 4px;
+      color: #f8f3f3; /* White text color */
+      margin-top: 5px;
+    }
+    
+
+    .ratings {
+      font-size: 18px;
+      color: #ffd900;
+      margin-top: 10px;
+    }
+
+    .star {
+      margin-right: 5px;
+    }
+
+    /* Animation for slide-in */
+    @keyframes slideInFromRight {
+      0% {
+        transform: translateX(100%);
+      }
+      100% {
+        transform: translateX(0);
+      }
+    }
+
+    /* Media Query for Mobile View */
+    @media (max-width: 600px) {
+      .movie-card {
+        width: 90%;
+        margin-right: 5px;
+        height: auto;
+        margin-bottom: 10px;
+      }
+
+      .movie-details {
+        padding: 10px;
+        font-size: 14px;
+      }
+
+      .title {
+        font-size: 15px;
+      }
+
+      .language,
+      .quality,
+      .ratings {
+        font-size: 12px;
+      }
+    }
+
+    /* Media Query for Tablet View */
+    @media (min-width: 601px) and (max-width: 900px) {
+      .movie-card {
+        width: 70%;
+        margin-right: 5px;
+        
+      }
+    }
+
+    /* Media Query for Desktop View */
+    @media (min-width: 901px) {
+      .movie-card {
+        width: 70%;
+        margin-right: 10px;
+        
+      }
+    }
+
+
+
+
+
+
+/* Style for the header */
+header {
+  background-color: transparent;
+  color: white;
+  
+  padding: 7px 10px;
+}
+
+/* Style for the navigation bar */
+.navbar2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand-icon img {
+  width: 140px; /* Adjust the width as needed */
+  
+  height: auto; /* Maintain aspect ratio */
+}
+
+
+
+/* Style for the username */
+.username {
+  margin-right: 10px;
+}
+
+
+.login-button button {
+  background-color: #ececec;
+  color: #110f0f;
+  padding: 8px 15px;
+  border: 2px solid rgb(233, 12, 12); /* Add a border to the login button */
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.login-button button i {
+  margin-right: 5px;
+  font-size: 18px;
+  color: #D90000;
+}
+
+.login-button button:hover {
+  background-color: #e60b0b;
+  color: #f0f0f0;
+ 
+}
+.login-button :hover{
+  color: #f0f0f0;
+}
+
+/* Additional styles for the popup */
+.popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  max-width: 300px;
+  text-align: center;
+  border-radius: 5px;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+}
+.profile-icons {
+  display: flex;
+  align-items: center;
+}
+
+.popup p {
+  margin: 0;
+  font-size: 19px;
+  line-height: 1.5;
+  font-weight: bold;
+}
+
+.popup .highlight {
+  color: rgb(255, 255, 255);
+  padding: 4px;
+  border-radius: 4px;
+  background-color: #D90000;
+  font-weight: bold;
+}
+
+/* Add a subtle animation to the popup */
+@keyframes fadeInOut {
+  0% { opacity: 0; }
+  25% { opacity: 1; }
+  75% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.popup.show {
+  animation: fadeInOut 3s forwards;
+}
+
+
+
+
+
+/* Additional styles for the language dropdown */
+.language-dropdown {
+  position: relative;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.language-dropdown button {
+  background-color: #0d1013;
+  color: #fff;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+.language-dropdown button i {
+  margin-right: 5px;
+  font-size: 17px;
+  
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border-radius: 5px;
+  overflow: hidden;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform-origin: top;
+  opacity: 0;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-content a i {
+  margin-right: 10px;
+  color: #D90000;
+}
+
+.dropdown-content a:hover {
+  background-color: #a1a1a1;
+}
+
+.language-dropdown:hover .dropdown-content {
+  display: block;
+  transform: scaleY(1);
+  opacity: 1;
+}
+
+
+
+
+
+
+.slider2 {
+  position: relative;
+  width: 99%;
+  max-height: 500px;
+  overflow: hidden;
+ border-radius: 7px
+ ;
+ 
+  margin-bottom: 30px; /* Add some spacing between sliders */
+}
+
+
+.slider2 img {
+  width: 100%;
+  height: auto;
+  display: block;
+  
+}
+
+.banner {
+  position: relative;
+  width: 100%;
+  height:auto;
+  overflow: hidden;
+   opacity: 0; /* Initially set to transparent */
+  animation: fadeInImage 1s ease forwards;
+}
+
+@keyframes fadeInImage {
+  to {
+    opacity: 1; /* Fade in to full opacity */
+  }
+}
+
+.banner img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 6px;
+  margin: 10px auto;
+  margin-left: 6px;
+  margin-right: 6px;
+  position: relative;
+}
+
+.banner::after {
+  content: "";
+  position: absolute;
+ 
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: linear-gradient(transparent, rgba(230, 230, 230, 0.356));
+  pointer-events: none;
+}
+
+.movie-details2 {
+ background-color: #f0eeee;
+  padding: 10px;
+  border-radius: 0px 0px 6px 6px;
+  
+  margin-left:10px;
+  color: rgb(17, 15, 15);
+  text-align: center; /* Center-align the content */
+}
+
+.movie-info {
+  font-size: 18px;
+  margin: 10px 0;
+  opacity: 0; /* Initially set to transparent */
+  animation: fadeInInfo 1s ease forwards;
+  list-style: none; /* Remove default list bullets */
+  padding: 0;
+}
+
+.movie-info li {
+  display: inline;
+  margin-right: 10px;
+  position: relative;
+  padding-left: 10px;
+}
+
+.movie-info li:before {
+  content: "\2022"; /* Unicode bullet character */
+  position: absolute;
+  left: 0;
+}
+
+.action-buttons {
+  margin-top: 20px;
+}
+.action-button {
+  display: inline-block;
+  background: linear-gradient(to right, #FF1E00, #D90000); /* Darker red gradient color */
+  color: white;
+  padding: 18px 20px;
+  font-size: 23px;
+  margin-left: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.action-button i{
+  margin-left: 10px;
+}
+
+.action-button:hover {
+  background: linear-gradient(to right, #f1491f, #fa0b03); /* Brighter red gradient on hover */
+}
+
+.movie-title2 {
+  font-size: 25px;
+  font-weight: bold;
+  margin: 0;
+ opacity: 0;
+  transform: translateX(100%);
+  animation: slideInTitle 1s ease forwards;
+}
+
+
+@keyframes slideInTitle {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Media Queries for Responsive Design */
+@media screen and (max-width: 767px) {
+  .movie-details2 {
+    padding: 5px;
+  }
+
+  .movie-info {
+    font-size: 14px;
+  }
+
+   .additional-info {
+      flex-direction: rows; /* Stack additional info vertically */
+      align-items: center;
+     font-size:12px;
+    }
+
+   .additional-info-box {
+      margin: 5px 0; /* Add spacing between info boxes */
+      padding: 2px 4px; /* Adjust padding for smaller size */
+      font-size: 12px; /* Reduce font size for smaller size */
+    }
+
+    .additional-info-box.ua {
+      font-size: 12px; /* Reduce font size for U/A box */
+    }
+  
+  .action-button {
+    font-size: 17px;
+    padding: 5px 10px;
+  }
+
+  .movie-title2 {
+    font-size: 25px;
+  }
+}
+
+ .additional-info {
+    display: flex;
+   font-size:13px;
+    color: rgb(211, 211, 211);
+   font-weight:bold;
+    opacity: 0; /* Initially set to transparent */
+  animation: fadeInInfo 1s ease forwards;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5px;
+  }
+
+  .additional-info-box.ua {
+   background-color: rgb(255, 230, 0);
+    color: black;
+  }
+
+  .additional-info-box {
+    background-color:#161414;
+    padding: 3px 5px;
+    border-radius: 2px; 
+    margin: 0 5px;
+  }
+
+/* Your existing CSS styles */
+
+/* Slide indicators */
+.slide-indicators {
+  text-align: center;
+ margin-bottom: 10px;
+ 
+}
+
+.slide-indicator {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  background-color: #d1d1d1;
+  border-radius: 50%;
+  margin: 0 4px;
+ 
+  cursor: pointer;
+ 
+  transition: background-color 0.3s ease;
+}
+
+.slide-indicator.active {
+  background-color: #f31212;
+  width: 16px;
+  border-radius: 6px
+  ;
+}
+
+
+
+/* Animation for additional info and movie info */
+@keyframes fadeInInfo {
+  to {
+    opacity: 1; /* Fade in to full opacity */
+  }
+}
+
+   
